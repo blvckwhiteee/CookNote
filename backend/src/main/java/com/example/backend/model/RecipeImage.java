@@ -1,8 +1,10 @@
-package com.example.backend.model.images;
+package com.example.backend.model;
 
-import com.example.backend.model.Recipe;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "recipe_images")
