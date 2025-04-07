@@ -4,6 +4,7 @@ import com.example.backend.dto.IngredientsDto;
 import com.example.backend.dto.RecipeCreationDto;
 import com.example.backend.model.*;
 import com.example.backend.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class RecipeCreationService {
 
     private final IngredientsRepository ingredientsRepository;
@@ -23,13 +25,6 @@ public class RecipeCreationService {
     private final RecipesRepository recipesRepository;
     private final RecipeStepsRepository recipeStepsRepository;
 
-    public RecipeCreationService(IngredientsRepository ingredientsRepository, RecipeImagesRepository recipeImagesRepository, RecipeIngredientsRepository recipeIngredientsRepository, RecipesRepository recipesRepository, RecipeStepsRepository recipeStepsRepository) {
-        this.ingredientsRepository = ingredientsRepository;
-        this.recipeImagesRepository = recipeImagesRepository;
-        this.recipeIngredientsRepository = recipeIngredientsRepository;
-        this.recipesRepository = recipesRepository;
-        this.recipeStepsRepository = recipeStepsRepository;
-    }
 
     public ResponseEntity<String> createRecipe(@RequestBody RecipeCreationDto recipeCreationDto) {
         Recipe recipe = saveRecipeInformation(recipeCreationDto.getTitle(), recipeCreationDto.getSteps());
