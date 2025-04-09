@@ -1,5 +1,9 @@
 {
-  "name": "frontend",
+  "name": "cook_note",
+  "author": {
+    "name": "Elizabeth",
+    "url": "https://github.com/Liza-Khube"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
