@@ -1,3 +1,18 @@
 .App {
-  text-align: center;
+  text-align: left;
+  max-width: 70%;
+  margin: 24px auto;
+}
+
+h1 {
+  font-size: 40px;
+  color: #b3601c;
+  margin: 10px auto;
+}
+p {
+  font-size: 20px;
+}
+
+.icon {
+  margin-right: 10px;
 }

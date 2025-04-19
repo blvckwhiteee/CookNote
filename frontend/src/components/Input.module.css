@@ -1,0 +1,17 @@
+.container {
+  margin-top: 26px;
+}
+
+.container input {
+  border: 2px solid #68662a;
+  border-radius: 14px;
+  margin: 18px 0 12px;
+  font-size: 20px;
+  color: #68662a;
+}
+
+.container label {
+  font-size: 25px;
+  font-weight: bold;
+  color: #b3601c;
+}

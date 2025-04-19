@@ -1,0 +1,15 @@
+.container p {
+  color: #68662a;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42vh;
+  gap: 20px;
+}
