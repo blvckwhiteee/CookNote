@@ -18,7 +18,7 @@ public class RecipeStep {
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int stepNumber;
 
     @Column(nullable = false)

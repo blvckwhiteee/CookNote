@@ -106,7 +106,7 @@ public class RecipeCreationService {
             RecipeImage recipeImageInfo = new RecipeImage();
             recipeImageInfo.setRecipe(recipe);
             recipeImageInfo.setImageUrl(recipeImage.getImageUrl());
-            recipeImageInfo.setMain(recipeImage.isMain());
+            recipeImageInfo.setIsMain(recipeImage.getIsMain());
             recipeImageList.add(recipeImageInfo);
         }
         recipeImagesRepository.saveAll(recipeImageList);
