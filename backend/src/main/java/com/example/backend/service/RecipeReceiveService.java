@@ -1,7 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.IngredientsDto;
-import com.example.backend.dto.TotalRecipeInformationDto;
+import com.example.backend.dto.response.RecipeResponseDto;
 import com.example.backend.model.Recipe;
 import com.example.backend.repository.RecipeImagesRepository;
 import com.example.backend.repository.RecipeIngredientsRepository;
@@ -19,14 +19,14 @@ public class RecipeReceiveService {
     private final RecipeImagesRepository recipeImagesRepository;
     private final RecipeIngredientsRepository recipeIngredientsRepository;
 
-    public TotalRecipeInformationDto getTotalRecipeInformation(int recipeId) {
-        TotalRecipeInformationDto totalRecipeInformationDto = new TotalRecipeInformationDto();
+    public RecipeResponseDto getTotalRecipeInformation(int recipeId) {
+        RecipeResponseDto recipeResponseDto = new RecipeResponseDto();
 
-        totalRecipeInformationDto.setTitle(recipesRepository.findById(recipeId).get().getTitle());
-        totalRecipeInformationDto.setImagesUrl(getImagesUrls(recipeId));
-        totalRecipeInformationDto.setIngredients(getIngredients(recipeId));
-        totalRecipeInformationDto.setTimeToCook(getTimeToCook(recipeId));
-        return totalRecipeInformationDto;
+        recipeResponseDto.setTitle(recipesRepository.findById(recipeId).get().getTitle());
+        recipeResponseDto.setImagesUrl(getImagesUrls(recipeId));
+        recipeResponseDto.setIngredients(getIngredients(recipeId));
+        recipeResponseDto.setTimeToCook(getTimeToCook(recipeId));
+        return recipeResponseDto;
     }
 
     private List<String> getImagesUrls(int recipeId) {
