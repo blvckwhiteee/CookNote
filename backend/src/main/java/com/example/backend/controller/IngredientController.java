@@ -1,13 +1,10 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.MatchedRecipeDto;
+import com.example.backend.dto.response.MatchedRecipeResponseDto;
 import com.example.backend.model.Ingredient;
 import com.example.backend.service.IngredientsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class IngredientController {
 
 
     @GetMapping("/search")
-    public List<MatchedRecipeDto> getAllMatchedRecipes(@RequestBody List<String> ingredientNames) {
+    public List<MatchedRecipeResponseDto> getAllMatchedRecipes(@RequestParam List<String> ingredientNames) {
         return ingredientsService.getAllMatchedRecipesByNames(ingredientNames);
     }
 }

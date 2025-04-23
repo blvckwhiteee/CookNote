@@ -1,9 +1,8 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.MatchedRecipeDto;
+import com.example.backend.dto.response.MatchedRecipeResponseDto;
 import com.example.backend.model.Ingredient;
 import com.example.backend.model.Recipe;
-import com.example.backend.model.RecipeImage;
 import com.example.backend.model.RecipeIngredients;
 import com.example.backend.repository.IngredientsRepository;
 import com.example.backend.repository.RecipeImagesRepository;
@@ -25,7 +24,7 @@ public class IngredientsService {
         return ingredientsRepository.findAll();
     }
 
-    public List<MatchedRecipeDto> getAllMatchedRecipesByNames(List<String> ingredientNames) {
+    public List<MatchedRecipeResponseDto> getAllMatchedRecipesByNames(List<String> ingredientNames) {
         if (ingredientNames == null || ingredientNames.isEmpty()) {
             return Collections.emptyList();
         }
@@ -45,7 +44,7 @@ public class IngredientsService {
         Map<Recipe, List<RecipeIngredients>> ingredientsByRecipe = allRecipeIngredients.stream()
                 .collect(Collectors.groupingBy(RecipeIngredients::getRecipe));
 
-        List<MatchedRecipeDto> matchedRecipes = new ArrayList<>();
+        List<MatchedRecipeResponseDto> matchedRecipes = new ArrayList<>();
 
         for (Map.Entry<Recipe, List<RecipeIngredients>> entry : ingredientsByRecipe.entrySet()) {
             Recipe recipe = entry.getKey();
@@ -56,7 +55,7 @@ public class IngredientsService {
                     .count();
 
             if (matchedCount > 0) {
-                MatchedRecipeDto dto = new MatchedRecipeDto();
+                MatchedRecipeResponseDto dto = new MatchedRecipeResponseDto();
                 dto.setTitle(recipe.getTitle());
                 dto.setMatchedIngredients((int) matchedCount);
                 dto.setTimeToCook(recipe.getTotalCookingTime());
