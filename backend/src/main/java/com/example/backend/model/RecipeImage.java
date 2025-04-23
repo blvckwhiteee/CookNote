@@ -25,5 +25,5 @@ public class RecipeImage {
     private String imageUrl;
 
     @Column(nullable = false)
-    private boolean isMain;
+    private Boolean isMain;
 }

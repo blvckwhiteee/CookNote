@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +25,6 @@ public class Recipe {
     private int totalCookingTime;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<RecipeStep> steps =  new ArrayList<>();
 }

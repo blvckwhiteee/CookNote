@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,9 +17,10 @@ public class RecipeStep {
 
     @ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false)
+    @JsonBackReference
     private Recipe recipe;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int stepNumber;
 
     @Column(nullable = false)
