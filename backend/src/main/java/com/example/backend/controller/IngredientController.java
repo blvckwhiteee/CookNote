@@ -23,7 +23,7 @@ public class IngredientController {
     }
 
 
-    @GetMapping("/match")
+    @GetMapping("/search")
     public List<MatchedRecipeDto> getAllMatchedRecipes(@RequestBody List<String> ingredientNames) {
         return ingredientsService.getAllMatchedRecipesByNames(ingredientNames);
     }

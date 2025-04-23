@@ -19,11 +19,10 @@ public class RecipeReceiveService {
     private final RecipeImagesRepository recipeImagesRepository;
     private final RecipeIngredientsRepository recipeIngredientsRepository;
 
-    public TotalRecipeInformationDto getTotalRecipeInformation(String title) {
+    public TotalRecipeInformationDto getTotalRecipeInformation(int recipeId) {
         TotalRecipeInformationDto totalRecipeInformationDto = new TotalRecipeInformationDto();
 
-        int recipeId = recipesRepository.findAll().stream().filter(recipe -> recipe.getTitle().equals(title)).findFirst().get().getId();
-        totalRecipeInformationDto.setTitle(title);
+        totalRecipeInformationDto.setTitle(recipesRepository.findById(recipeId).get().getTitle());
         totalRecipeInformationDto.setImagesUrl(getImagesUrls(recipeId));
         totalRecipeInformationDto.setIngredients(getIngredients(recipeId));
         totalRecipeInformationDto.setTimeToCook(getTimeToCook(recipeId));

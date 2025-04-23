@@ -13,8 +13,8 @@ import java.util.List;
 public class RecipeStepsReceiveController {
     private final RecipeStepsReceiveService recipeStepsReceiveService;
 
-    @GetMapping("/{title}")
-    public List<RecipeStep> getAllRecipeSteps(@PathVariable String title) {
-        return recipeStepsReceiveService.getAllRecipeSteps(title);
+    @GetMapping("/{recipeId}")
+    public List<RecipeStep> getAllRecipeSteps(@PathVariable int recipeId) {
+        return recipeStepsReceiveService.getAllRecipeSteps(recipeId);
     }
 }

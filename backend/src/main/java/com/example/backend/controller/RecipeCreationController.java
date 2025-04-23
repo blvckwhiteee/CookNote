@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/create")
+@RequestMapping("/api/recipe/create")
 public class RecipeCreationController {
     private final RecipeCreationService recipeCreationService;
 

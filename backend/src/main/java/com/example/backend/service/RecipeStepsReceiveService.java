@@ -13,7 +13,7 @@ public class RecipeStepsReceiveService {
 
     private final RecipeStepsRepository recipeStepsRepository;
 
-    public List<RecipeStep> getAllRecipeSteps(String title) {
-        return recipeStepsRepository.findAllByRecipe_Title(title);
+    public List<RecipeStep> getAllRecipeSteps(int recipeId) {
+        return recipeStepsRepository.findAllByRecipe_Id(recipeId);
     }
 }

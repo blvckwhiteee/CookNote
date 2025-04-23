@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 public class RecipeReceiveController {
     private final RecipeReceiveService recipeReceiveService;
 
-    @GetMapping("{title}")
-    public TotalRecipeInformationDto getTotalRecipeInformation(@PathVariable String title) {
-        return recipeReceiveService.getTotalRecipeInformation(title);
+    @GetMapping("{recipeId}")
+    public TotalRecipeInformationDto getTotalRecipeInformation(@PathVariable int recipeId) {
+        return recipeReceiveService.getTotalRecipeInformation(recipeId);
     }
 }
