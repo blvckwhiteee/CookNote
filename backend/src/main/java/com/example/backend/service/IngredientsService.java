@@ -40,7 +40,6 @@ public class IngredientsService {
 
         List<RecipeIngredients> allRecipeIngredients = recipeIngredientsRepository.findAll();
 
-        // Группируем по рецептам
         Map<Recipe, List<RecipeIngredients>> ingredientsByRecipe = allRecipeIngredients.stream()
                 .collect(Collectors.groupingBy(RecipeIngredients::getRecipe));
 
