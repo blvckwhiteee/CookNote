@@ -1,7 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.IngredientsDto;
-import com.example.backend.dto.RecipeCreationDto;
+import com.example.backend.dto.request.RecipeCreationRequestDto;
 import com.example.backend.model.*;
 import com.example.backend.repository.*;
 import jakarta.transaction.Transactional;
@@ -27,12 +27,12 @@ public class RecipeCreationService {
     private final RecipeStepsRepository recipeStepsRepository;
 
     @Transactional
-    public ResponseEntity<String> createRecipe(@RequestBody RecipeCreationDto recipeCreationDto) {
-        Recipe recipe = saveRecipeInformation(recipeCreationDto.getTitle(), recipeCreationDto.getSteps());
-        saveNewIngredients(recipeCreationDto.getIngredients());
-        saveRecipeIngredientsInfo(recipe, recipeCreationDto.getIngredients());
-        saveRecipeImagesInfo(recipe, recipeCreationDto.getPictures());
-        saveRecipeStepsInfo(recipe, recipeCreationDto.getSteps());
+    public ResponseEntity<String> createRecipe(@RequestBody RecipeCreationRequestDto recipeCreationRequestDto) {
+        Recipe recipe = saveRecipeInformation(recipeCreationRequestDto.getTitle(), recipeCreationRequestDto.getSteps());
+        saveNewIngredients(recipeCreationRequestDto.getIngredients());
+        saveRecipeIngredientsInfo(recipe, recipeCreationRequestDto.getIngredients());
+        saveRecipeImagesInfo(recipe, recipeCreationRequestDto.getPictures());
+        saveRecipeStepsInfo(recipe, recipeCreationRequestDto.getSteps());
 
         return ResponseEntity.ok("Recipe was successfully created");
 
@@ -106,7 +106,7 @@ public class RecipeCreationService {
             RecipeImage recipeImageInfo = new RecipeImage();
             recipeImageInfo.setRecipe(recipe);
             recipeImageInfo.setImageUrl(recipeImage.getImageUrl());
-            recipeImageInfo.setMain(recipeImage.isMain());
+            recipeImageInfo.setIsMain(recipeImage.getIsMain());
             recipeImageList.add(recipeImageInfo);
         }
         recipeImagesRepository.saveAll(recipeImageList);
