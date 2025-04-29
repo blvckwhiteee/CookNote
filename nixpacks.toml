@@ -1,0 +1,5 @@
+[phases.setup]
+nixPkgs = ["maven"]
+
+[start]
+cmd = "cd backend && mvn spring-boot:run"
