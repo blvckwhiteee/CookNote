@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import CreateRecipePage from "./pages/CreateRecipePage";
 import FindRecipePage from "./pages/FindRecipePage";
 import NotFound from "./pages/NotFound";
+import SingleRecipePage from "./pages/SingleRecipePage";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
               {/* <Route path="add-step" element={CookingPage} /> */}
             </Route>
             <Route path="find-recipe" element={<FindRecipePage />} />
+            <Route
+              path="find-recipe/:recipeSlug"
+              element={<SingleRecipePage />}
+            />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
