@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./pages/Header";
+import HomePage from "./pages/HomePage";
+import CreateRecipePage from "./pages/CreateRecipePage";
+import FindRecipePage from "./pages/FindRecipePage";
+import NotFound from "./pages/NotFound";
+import SingleRecipePage from "./pages/SingleRecipePage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<HomePage />} />
+            <Route path="create-recipe" element={<CreateRecipePage />}>
+              {/* <Route path="add-step" element={CookingPage} /> */}
+            </Route>
+            <Route path="find-recipe" element={<FindRecipePage />} />
+            <Route
+              path="find-recipe/:recipeSlug"
+              element={<SingleRecipePage />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
