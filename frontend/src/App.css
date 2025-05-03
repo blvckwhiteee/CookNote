@@ -16,3 +16,58 @@ p {
 .icon {
   margin-right: 10px;
 }
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.loader {
+  width: 48px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  background: #b3601c;
+  border-radius: 15% 15% 35% 35%;
+}
+
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 45px;
+  top: 8px;
+  border: 5px solid #b3601c;
+  width: 18px;
+  height: 20px;
+  border-radius: 0 4px 4px 0;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 18px;
+  color: #b3601c;
+  top: -8px;
+  left: 11px;
+
+  animation: animloader 1s ease infinite;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: 2px -20px rgba(179, 96, 28, 0),
+      12px -20px rgba(179, 96, 28, 0.3), 20px -20px rgba(179, 96, 28, 0);
+  }
+  50% {
+    box-shadow: 2px -25px rgba(179, 96, 28, 0.5),
+      12px -23px rgba(179, 96, 28, 0.5), 20px -22px rgba(179, 96, 28, 0.6);
+  }
+  100% {
+    box-shadow: 2px -28px rgba(179, 96, 28, 0), 12px -25px rgba(179, 96, 28, 0),
+      20px -25px rgba(179, 96, 28, 0);
+  }
+}

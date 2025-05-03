@@ -13,3 +13,12 @@
   height: 42vh;
   gap: 20px;
 }
+
+.buttonContainer a {
+  text-decoration: none;
+}
+
+.buttonContainer button {
+  display: flex;
+  align-items: center;
+}

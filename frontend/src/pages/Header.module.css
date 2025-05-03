@@ -1,6 +1,7 @@
 .header {
   color: #b3601c;
   margin-bottom: 16px;
+  max-width: 50%;
 }
 
 .header a {

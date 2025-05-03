@@ -1,0 +1,23 @@
+.ingrContainer {
+  border: 2px solid #68662a;
+  border-radius: 30px;
+  padding: 30px 40px;
+  margin: 40px auto;
+  width: 80%;
+}
+
+.ingrContainer hr {
+  height: 1.3px;
+  color: #68662a;
+  background-color: #68662a;
+}
+
+.ingrContainer button {
+  margin: 20px auto 10px;
+  display: block;
+}
+
+.message {
+  color: #68662a;
+  text-align: center;
+}
