@@ -9,8 +9,14 @@ h1 {
   color: #b3601c;
   margin: 10px auto;
 }
+
 p {
   font-size: 20px;
+}
+
+.message {
+  color: #68662a;
+  text-align: center;
 }
 
 .icon {
@@ -59,12 +65,12 @@ p {
 
 @keyframes animloader {
   0% {
-    box-shadow: 2px -20px rgba(179, 96, 28, 0),
-      12px -20px rgba(179, 96, 28, 0.3), 20px -20px rgba(179, 96, 28, 0);
+    box-shadow: 2px -20px rgba(179, 96, 28, 0), 12px -20px rgba(179, 96, 28, 0.3),
+      20px -20px rgba(179, 96, 28, 0);
   }
   50% {
-    box-shadow: 2px -25px rgba(179, 96, 28, 0.5),
-      12px -23px rgba(179, 96, 28, 0.5), 20px -22px rgba(179, 96, 28, 0.6);
+    box-shadow: 2px -25px rgba(179, 96, 28, 0.5), 12px -23px rgba(179, 96, 28, 0.5),
+      20px -22px rgba(179, 96, 28, 0.6);
   }
   100% {
     box-shadow: 2px -28px rgba(179, 96, 28, 0), 12px -25px rgba(179, 96, 28, 0),

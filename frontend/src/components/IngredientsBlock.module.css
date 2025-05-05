@@ -6,6 +6,10 @@
   width: 80%;
 }
 
+.ingrContainer p {
+  opacity: 25%;
+}
+
 .ingrContainer hr {
   height: 1.3px;
   color: #68662a;
@@ -15,9 +19,4 @@
 .ingrBtnSearch button {
   margin: 40px auto 10px;
   display: block;
-}
-
-.message {
-  color: #68662a;
-  text-align: center;
 }

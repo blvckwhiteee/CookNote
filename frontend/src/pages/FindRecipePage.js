@@ -1,40 +1,10 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
-import RecipeContainer from "../components/RecipeContainer";
-import IngrSearch from "../components/IngrSearch";
-import styles from "./FindRecipePage.module.css";
-
-function IngredientsBlock({ onSearch, ingredients }) {
-  return (
-    <div className={styles.ingrContainer}>
-      <h1>My ingredients</h1>
-      <hr />
-      <IngrSearch ingredients={ingredients} />
-      <div className={styles.ingrBtnSearch}>
-        <Button paddingBtn="20px 10%" borderRadiusBtn="50px" onClick={onSearch}>
-          Search
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-function RecipesBlock({ recipesList }) {
-  return (
-    <>
-      <h1>Recipes</h1>
-      <div>
-        {/* {recipesList.map(recipe => {
-        <RecipeContainer key={recipe.id} recipe={recipe}/>
-      })} */}
-        <RecipeContainer recipe={recipesList} />
-      </div>
-    </>
-  );
-}
+import IngredientsBlock from "../components/IngredientsBlock";
+import RecipesBlock from "../components/RecipesBlock";
 
 const FindRecipePage = () => {
   const [allIngredients, setAllIngredients] = useState([]);
+  const [selectedIngr, setSelectedIngr] = useState([]);
   const [showRecipes, setShowRecipes] = useState(false);
   const [recipes, setRecipes] = useState(null);
   const [error, setError] = useState("");
@@ -56,21 +26,26 @@ const FindRecipePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const hendleSearch = async () => {
+  const handleSearch = async () => {
+    if (selectedIngr.length === 0) return;
     setIsLoading(true);
     setError("");
+    const queryParams = selectedIngr
+      .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
+      .join("&");
     try {
-      const res = await fetch("http://localhost:8080/api/recipe/2");
-      if (!res.ok) {
-        throw new Error(res.status);
-      }
-      const recipes = await res.json();
-      setRecipes(recipes);
+      const res = await fetch(
+        `http://localhost:8080/api/ingredients/search?${queryParams}`
+      );
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      setRecipes(data);
       setShowRecipes(true);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   if (isLoading) {
@@ -82,7 +57,7 @@ const FindRecipePage = () => {
   }
 
   if (error) {
-    return <h1 className={styles.message}>Error: {error}</h1>;
+    return <h1 className="message">Error: {error}</h1>;
   }
 
   return (
@@ -90,7 +65,12 @@ const FindRecipePage = () => {
       {showRecipes ? (
         <RecipesBlock recipesList={recipes} />
       ) : (
-        <IngredientsBlock ingredients={allIngredients} onSearch={hendleSearch} />
+        <IngredientsBlock
+          ingredients={allIngredients}
+          onSearch={handleSearch}
+          selectedIngr={selectedIngr}
+          setSelectedIngr={setSelectedIngr}
+        />
       )}
     </div>
   );

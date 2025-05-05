@@ -3,8 +3,7 @@ import { TextField, Autocomplete, Box } from "@mui/material";
 import { IngrChip } from "../components/Chip";
 import styles from "./IngrSearch.module.css";
 
-const IngrSearch = ({ ingredients }) => {
-  const [selectedIngr, setSelectedIngr] = useState([]);
+const IngrSearch = ({ ingredients, selectedIngr, setSelectedIngr }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event, value) => {
