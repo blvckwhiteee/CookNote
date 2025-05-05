@@ -1,7 +1,7 @@
-import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import Button from "../components/Button";
 import styles from "./HomePage.module.css";
 
 const HomePage = () => {

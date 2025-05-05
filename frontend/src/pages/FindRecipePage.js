@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import RecipeContainer from "../components/RecipeContainer";
+import IngrSearch from "../components/IngrSearch";
 import styles from "./FindRecipePage.module.css";
 
-function IngredientsBlock({ onSearch }) {
+function IngredientsBlock({ onSearch, ingredients }) {
   return (
     <div className={styles.ingrContainer}>
       <h1>My ingredients</h1>
       <hr />
-      <Button paddingBtn="20px 14%" borderRadiusBtn="50px" onClick={onSearch}>
-        Search
-      </Button>
+      <IngrSearch ingredients={ingredients} />
+      <div className={styles.ingrBtnSearch}>
+        <Button paddingBtn="20px 10%" borderRadiusBtn="50px" onClick={onSearch}>
+          Search
+        </Button>
+      </div>
     </div>
   );
 }
@@ -20,6 +24,9 @@ function RecipesBlock({ recipesList }) {
     <>
       <h1>Recipes</h1>
       <div>
+        {/* {recipesList.map(recipe => {
+        <RecipeContainer key={recipe.id} recipe={recipe}/>
+      })} */}
         <RecipeContainer recipe={recipesList} />
       </div>
     </>
@@ -27,16 +34,15 @@ function RecipesBlock({ recipesList }) {
 }
 
 const FindRecipePage = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const [allIngredients, setAllIngredients] = useState([]);
   const [showRecipes, setShowRecipes] = useState(false);
   const [recipes, setRecipes] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const hendleSearch = () => {
+  useEffect(() => {
     setIsLoading(true);
-    setError("");
-    fetch("http://localhost:8080/api/recipe/2")
+    fetch("http://localhost:8080/api/ingredients")
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.status);
@@ -44,11 +50,27 @@ const FindRecipePage = () => {
         return res.json();
       })
       .then((json) => {
-        setRecipes(json);
-        setShowRecipes(true);
+        setAllIngredients(json);
       })
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
+  }, []);
+
+  const hendleSearch = async () => {
+    setIsLoading(true);
+    setError("");
+    try {
+      const res = await fetch("http://localhost:8080/api/recipe/2");
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+      const recipes = await res.json();
+      setRecipes(recipes);
+      setShowRecipes(true);
+    } catch (err) {
+      setError(err.message);
+    }
+    setIsLoading(false);
   };
 
   if (isLoading) {
@@ -68,7 +90,7 @@ const FindRecipePage = () => {
       {showRecipes ? (
         <RecipesBlock recipesList={recipes} />
       ) : (
-        <IngredientsBlock onSearch={hendleSearch} />
+        <IngredientsBlock ingredients={allIngredients} onSearch={hendleSearch} />
       )}
     </div>
   );
