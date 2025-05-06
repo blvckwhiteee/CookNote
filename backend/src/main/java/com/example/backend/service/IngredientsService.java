@@ -8,6 +8,7 @@ import com.example.backend.repository.IngredientsRepository;
 import com.example.backend.repository.RecipeImagesRepository;
 import com.example.backend.repository.RecipeIngredientsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,10 +21,15 @@ public class IngredientsService {
     private final RecipeIngredientsRepository recipeIngredientsRepository;
     private final RecipeImagesRepository recipeImagesRepository;
 
+    @Cacheable(value = "allIngredients", key = "'allIngredients'")
     public List<Ingredient> getAllIngredients() {
         return ingredientsRepository.findAll();
     }
 
+    @Cacheable(
+            value = "matchedRecipes",
+            key = "#ingredientNames.?[#this != null].stream().sorted().toList().toString()"
+    )
     public List<MatchedRecipeResponseDto> getAllMatchedRecipesByNames(List<String> ingredientNames) {
         if (ingredientNames == null || ingredientNames.isEmpty()) {
             return Collections.emptyList();

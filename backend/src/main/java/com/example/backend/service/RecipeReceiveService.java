@@ -7,6 +7,7 @@ import com.example.backend.repository.RecipeImagesRepository;
 import com.example.backend.repository.RecipeIngredientsRepository;
 import com.example.backend.repository.RecipesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class RecipeReceiveService {
     private final RecipeImagesRepository recipeImagesRepository;
     private final RecipeIngredientsRepository recipeIngredientsRepository;
 
+    @Cacheable(value = "recipe")
     public RecipeResponseDto getTotalRecipeInformation(int recipeId) {
         RecipeResponseDto recipeResponseDto = new RecipeResponseDto();
 

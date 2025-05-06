@@ -6,6 +6,7 @@ import com.example.backend.model.*;
 import com.example.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RecipeCreationService {
+public class RecipeService {
 
     private final IngredientsRepository ingredientsRepository;
     private final RecipeImagesRepository recipeImagesRepository;
@@ -123,6 +124,15 @@ public class RecipeCreationService {
             recipeStepList.add(recipeStepInfo);
         }
         recipeStepsRepository.saveAll(recipeStepList);
+    }
+
+
+    public void deleteAllRecipes() {
+        recipeImagesRepository.deleteAll();
+        recipeStepsRepository.deleteAll();
+        recipeIngredientsRepository.deleteAll();
+        ingredientsRepository.deleteAll();
+        recipesRepository.deleteAll();
     }
 
 }
