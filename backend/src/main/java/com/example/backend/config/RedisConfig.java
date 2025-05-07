@@ -15,13 +15,10 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
-        // Сериализатор для ключей (используем строки)
         template.setKeySerializer(new StringRedisSerializer());
 
-        // Сериализатор для значений (JSON)
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 
-        // Сериализаторы для хэш-ключей и значений (если используете Redis Hashes)
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
 

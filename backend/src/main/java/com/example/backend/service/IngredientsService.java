@@ -23,6 +23,7 @@ public class IngredientsService {
 
     @Cacheable(value = "allIngredients", key = "'allIngredients'")
     public List<Ingredient> getAllIngredients() {
+        System.out.println("Get from DB");
         return ingredientsRepository.findAll();
     }
 
