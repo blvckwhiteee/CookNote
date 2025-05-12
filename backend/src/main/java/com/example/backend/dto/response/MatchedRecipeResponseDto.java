@@ -15,6 +15,9 @@ public class MatchedRecipeResponseDto {
     private String title;
 
     @NotBlank
+    private int id;
+
+    @NotBlank
     private int matchedIngredients;
 
     @NotBlank
