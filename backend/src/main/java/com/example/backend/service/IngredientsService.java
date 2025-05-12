@@ -58,6 +58,7 @@ public class IngredientsService {
                 dto.setTitle(recipe.getTitle());
                 dto.setMatchedIngredients((int) matchedCount);
                 dto.setTimeToCook(recipe.getTotalCookingTime());
+                dto.setId(recipe.getId());
 
                 recipeImagesRepository.findByRecipeIdAndIsMainTrue(recipe.getId())
                         .ifPresent(image -> dto.setMainPictureUrl(image.getImageUrl()));
