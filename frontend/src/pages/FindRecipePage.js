@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import IngredientsBlock from "../components/IngredientsBlock";
 import RecipesBlock from "../components/RecipesBlock";
+import API from "../services/api";
 
 const FindRecipePage = () => {
   const [allIngredients, setAllIngredients] = useState([]);
@@ -12,13 +13,7 @@ const FindRecipePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/api/ingredients")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.status);
-        }
-        return res.json();
-      })
+    API.ingredients()
       .then((json) => {
         setAllIngredients(json);
       })
@@ -34,11 +29,7 @@ const FindRecipePage = () => {
       .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
       .join("&");
     try {
-      const res = await fetch(
-        `http://localhost:8080/api/ingredients/search?${queryParams}`
-      );
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
+      const data = await API.ingredients(`search?${queryParams}`);
       setRecipes(data);
       setShowRecipes(true);
     } catch (err) {

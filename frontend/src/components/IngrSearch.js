@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField, Autocomplete, Box } from "@mui/material";
-import { IngrChip } from "../components/Chip";
+import { IngrChip } from "./CustomChip";
 import styles from "./IngrSearch.module.css";
 
 const IngrSearch = ({ ingredients, selectedIngr, setSelectedIngr }) => {

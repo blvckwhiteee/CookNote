@@ -5,6 +5,7 @@ import CreateRecipePage from "./pages/CreateRecipePage";
 import FindRecipePage from "./pages/FindRecipePage";
 import NotFound from "./pages/NotFound";
 import SingleRecipePage from "./pages/SingleRecipePage";
+import StepsPage from "./pages/StepsPage";
 import "./App.css";
 
 function App() {
@@ -14,14 +15,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route index element={<HomePage />} />
-            <Route path="create-recipe" element={<CreateRecipePage />}>
-              {/* <Route path="add-step" element={CookingPage} /> */}
-            </Route>
+            <Route path="create-recipe" element={<CreateRecipePage />} />
             <Route path="find-recipe" element={<FindRecipePage />} />
             <Route
-              path="find-recipe/:recipeSlug"
+              path="find-recipe/:recipeSlug/:recipeId"
               element={<SingleRecipePage />}
             />
+            <Route
+              path="find-recipe/:recipeSlug/:recipeId/steps"
+              element={<StepsPage />}
+            />
+
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -18,7 +18,6 @@ const IngredientsBlock = ({ onSearch, ingredients, selectedIngr, setSelectedIngr
           Search
         </Button>
       </div>
-      {console.log(selectedIngr)}
     </div>
   );
 };
