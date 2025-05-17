@@ -1,29 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IngredientsBlock from "../components/IngredientsBlock";
 import RecipesBlock from "../components/RecipesBlock";
+import { useRecipeContext } from "../store/Context";
 import API from "../services/api";
 
 const FindRecipePage = () => {
+  const { selectedIngr, setSelectedIngr, setRecipes, showRecipes, setShowRecipes } =
+    useRecipeContext();
   const [allIngredients, setAllIngredients] = useState([]);
-  const [selectedIngr, setSelectedIngr] = useState([]);
-  const [showRecipes, setShowRecipes] = useState(false);
-  const [recipes, setRecipes] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const loaderTimeoutRef = useRef(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    API.ingredients()
-      .then((json) => {
-        setAllIngredients(json);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setIsLoading(false));
+    if (!allIngredients.length) {
+      loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 300);
+      API.ingredients()
+        .then((json) => {
+          setAllIngredients(json);
+        })
+        .catch((err) => setError(err.message))
+        .finally(() => {
+          clearTimeout(loaderTimeoutRef.current);
+          setIsLoading(false);
+        });
+    }
   }, []);
 
   const handleSearch = async () => {
     if (selectedIngr.length === 0) return;
-    setIsLoading(true);
+    loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 300);
     setError("");
     const queryParams = selectedIngr
       .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
@@ -35,6 +41,7 @@ const FindRecipePage = () => {
     } catch (err) {
       setError(err.message);
     } finally {
+      clearTimeout(loaderTimeoutRef.current);
       setIsLoading(false);
     }
   };
@@ -54,7 +61,7 @@ const FindRecipePage = () => {
   return (
     <div>
       {showRecipes ? (
-        <RecipesBlock recipesList={recipes} />
+        <RecipesBlock />
       ) : (
         <IngredientsBlock
           ingredients={allIngredients}

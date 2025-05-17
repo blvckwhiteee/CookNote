@@ -4,7 +4,7 @@ const Button = ({ children, paddingBtn, borderRadiusBtn, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={styles.button}
+      className={styles.standartBtn}
       style={{ padding: paddingBtn, borderRadius: borderRadiusBtn }}
     >
       {children}
@@ -12,4 +12,16 @@ const Button = ({ children, paddingBtn, borderRadiusBtn, onClick }) => {
   );
 };
 
-export default Button;
+const GreenButton = ({ children, paddingBtn, borderRadiusBtn, onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={styles.greentBtn}
+      style={{ padding: paddingBtn, borderRadius: borderRadiusBtn }}
+    >
+      {children}
+    </button>
+  );
+};
+
+export { Button, GreenButton };

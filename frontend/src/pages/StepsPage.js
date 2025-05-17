@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
-import Button from "../components/Button";
+import { GreenButton } from "../components/Button";
 import API from "../services/api";
 
 export const StepsPage = () => {
@@ -8,12 +8,12 @@ export const StepsPage = () => {
   return (
     <div>
       <div>
-        CookingPage <Button>Start timer</Button>
+        CookingPage <GreenButton>Start timer</GreenButton>
       </div>
       <div>Step 1</div>
-      <Button paddingBtn="8px 10px" borderRadiusBtn="100%">
+      <GreenButton paddingBtn="8px 10px" borderRadiusBtn="100%">
         <MdArrowForwardIos />
-      </Button>
+      </GreenButton>
     </div>
   );
 };

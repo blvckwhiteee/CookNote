@@ -1,0 +1,51 @@
+.sorter {
+  display: inline-block;
+  position: relative;
+}
+
+.sorter svg {
+  font-size: 32px;
+  color: #b3601c;
+}
+
+.sorter button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sorter button:hover {
+  opacity: 80%;
+}
+
+.dropdownContent {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 2px solid rgba(104, 102, 42, 0.55);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+.dropdownContent button {
+  margin: 0;
+  color: #68662a;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownContent button:hover {
+  color: #b3601c;
+}

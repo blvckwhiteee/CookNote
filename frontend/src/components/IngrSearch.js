@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { TextField, Autocomplete, Box } from "@mui/material";
+import { useRecipeContext } from "../store/Context";
 import { IngrChip } from "./CustomChip";
 import styles from "./IngrSearch.module.css";
 
-const IngrSearch = ({ ingredients, selectedIngr, setSelectedIngr }) => {
+const IngrSearch = ({ ingredients }) => {
   const [inputValue, setInputValue] = useState("");
+  const { selectedIngr, setSelectedIngr } = useRecipeContext();
 
   const handleChange = (event, value) => {
     setSelectedIngr(value);
@@ -17,7 +19,9 @@ const IngrSearch = ({ ingredients, selectedIngr, setSelectedIngr }) => {
     <Box className={styles.inputContainer}>
       <Autocomplete
         multiple
-        options={ingredients}
+        options={ingredients.filter(
+          (ingr) => !selectedIngr.some((sel) => sel.id === ingr.id)
+        )}
         getOptionLabel={(option) => option.name}
         onChange={handleChange}
         onInputChange={(event, value) => setInputValue(value)}

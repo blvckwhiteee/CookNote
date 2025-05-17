@@ -1,8 +1,9 @@
 .recipeContainer {
-  border: 3px solid #68662a;
+  width: 85%;
   border-radius: 18px;
-  margin: 18px 0 12px;
+  margin: 18px auto 12px;
   padding: 20px 40px;
+  background-color: rgba(104, 102, 42, 0.2);
 }
 
 .recipeContainer a {

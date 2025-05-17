@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import Button from "../components/Button";
+import { Button } from "../components/Button";
 import styles from "./SingleRecipePage.module.css";
 import API from "../services/api";
 

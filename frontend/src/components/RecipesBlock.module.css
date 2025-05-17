@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header button {
+  font-size: 20px;
+}
+
+.header h1 {
+  margin: 10px 0;
+}
+
+.rightBox {
+  display: flex;
+  gap: 70px;
+}
