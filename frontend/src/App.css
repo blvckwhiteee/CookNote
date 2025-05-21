@@ -1,6 +1,6 @@
 .App {
   text-align: left;
-  max-width: 70%;
+  max-width: 65%;
   margin: 24px auto;
 }
 
@@ -20,7 +20,7 @@ p {
 }
 
 .icon {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .loader-container {

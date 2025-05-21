@@ -4,6 +4,27 @@ import RecipesBlock from "../components/RecipesBlock";
 import { useRecipeContext } from "../store/Context";
 import API from "../services/api";
 
+const asyncDecorator = (
+  asyncFunc,
+  timerRef,
+  setIsLoading,
+  setError,
+  dependence = null
+) => {
+  return async function () {
+    timerRef.current = setTimeout(() => setIsLoading(true), 2000);
+    setError("");
+    try {
+      await asyncFunc(dependence);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      clearTimeout(timerRef.current);
+      setIsLoading(false);
+    }
+  };
+};
+
 const FindRecipePage = () => {
   const { selectedIngr, setSelectedIngr, setRecipes, showRecipes, setShowRecipes } =
     useRecipeContext();
@@ -12,39 +33,65 @@ const FindRecipePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const loaderTimeoutRef = useRef(null);
 
+  const searchIngrs = async () => {
+    const data = await API.ingredients();
+    setAllIngredients(data);
+  };
+
   useEffect(() => {
     if (!allIngredients.length) {
-      loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 300);
-      API.ingredients()
-        .then((json) => {
-          setAllIngredients(json);
-        })
-        .catch((err) => setError(err.message))
-        .finally(() => {
-          clearTimeout(loaderTimeoutRef.current);
-          setIsLoading(false);
-        });
+      asyncDecorator(searchIngrs, loaderTimeoutRef, setIsLoading, setError)();
     }
   }, []);
 
-  const handleSearch = async () => {
-    if (selectedIngr.length === 0) return;
-    loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 300);
-    setError("");
-    const queryParams = selectedIngr
+  const searchRecipes = async (ingrs) => {
+    const queryParams = ingrs
       .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
       .join("&");
-    try {
-      const data = await API.ingredients(`search?${queryParams}`);
-      setRecipes(data);
-      setShowRecipes(true);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      clearTimeout(loaderTimeoutRef.current);
-      setIsLoading(false);
-    }
+    const data = await API.ingredients(`search?${queryParams}`);
+    setRecipes(data);
+    setShowRecipes(true);
   };
+
+  const handleSearch = asyncDecorator(
+    searchRecipes,
+    loaderTimeoutRef,
+    setIsLoading,
+    setError,
+    selectedIngr
+  );
+
+  // useEffect(() => {
+  //   if (!allIngredients.length) {
+  //     loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
+  //     API.ingredients()
+  //       .then((json) => setAllIngredients(json))
+  //       .catch((err) => setError(err.message))
+  //       .finally(() => {
+  //         clearTimeout(loaderTimeoutRef.current);
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, []);
+
+  // const handleSearch = async () => {
+  //   if (selectedIngr.length === 0) return;
+  //   loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
+  //   setError("");
+  //   const queryParams = selectedIngr
+  //     .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
+  //     .join("&");
+  //   try {
+  //     const data = await API.ingredients(`search?${queryParams}`);
+  //     setRecipes(data);
+  //     setShowRecipes(true);
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     clearTimeout(loaderTimeoutRef.current);
+  //     setIsLoading(false);
+  //   }
+  // };
 
   if (isLoading) {
     return (

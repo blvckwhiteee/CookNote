@@ -1,16 +1,51 @@
-.Btn {
+.headerContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  margin: 18px 0;
+  gap: 15px;
+  width: 100%;
+  margin-top: 40px;
+  height: 205px;
 }
 
-.Btn a {
-  text-decoration: none;
+.headerContainer img {
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-right: 14px;
 }
 
-.Btn button {
+.imgBoxMain img {
+  height: 200px;
+}
+
+.imgBoxSmall img {
+  width: 25%;
+  align-self: flex-end;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  margin-right: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.footerBtn {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.infoContainer p {
+  color: #b3601c;
+  margin: 30px 0 8px;
+  font-weight: 600;
 }
