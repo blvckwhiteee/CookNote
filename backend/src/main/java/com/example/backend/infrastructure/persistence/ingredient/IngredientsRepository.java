@@ -1,5 +1,6 @@
-package com.example.backend.domain.ingredient;
+package com.example.backend.infrastructure.persistence.ingredient;
 
+import com.example.backend.domain.ingredient.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

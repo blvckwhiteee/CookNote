@@ -1,5 +1,6 @@
-package com.example.backend.domain.image;
+package com.example.backend.infrastructure.persistence.image;
 
+import com.example.backend.domain.image.RecipeImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
