@@ -61,38 +61,6 @@ const FindRecipePage = () => {
     selectedIngr
   );
 
-  // useEffect(() => {
-  //   if (!allIngredients.length) {
-  //     loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
-  //     API.ingredients()
-  //       .then((json) => setAllIngredients(json))
-  //       .catch((err) => setError(err.message))
-  //       .finally(() => {
-  //         clearTimeout(loaderTimeoutRef.current);
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // }, []);
-
-  // const handleSearch = async () => {
-  //   if (selectedIngr.length === 0) return;
-  //   loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
-  //   setError("");
-  //   const queryParams = selectedIngr
-  //     .map((ingr) => `ingredientNames=${encodeURIComponent(ingr.name)}`)
-  //     .join("&");
-  //   try {
-  //     const data = await API.ingredients(`search?${queryParams}`);
-  //     setRecipes(data);
-  //     setShowRecipes(true);
-  //   } catch (err) {
-  //     setError(err.message);
-  //   } finally {
-  //     clearTimeout(loaderTimeoutRef.current);
-  //     setIsLoading(false);
-  //   }
-  // };
-
   if (isLoading) {
     return (
       <div className="loader-container">

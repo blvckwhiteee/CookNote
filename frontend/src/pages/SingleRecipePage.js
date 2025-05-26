@@ -21,7 +21,7 @@ const SingleRecipePage = () => {
         clearTimeout(loaderTimeoutRef.current);
         setIsLoading(false);
       });
-  }, []);
+  }, [recipeId]);
 
   if (isLoading) {
     return (
