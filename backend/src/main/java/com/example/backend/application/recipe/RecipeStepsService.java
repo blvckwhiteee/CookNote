@@ -1,7 +1,7 @@
-package com.example.backend.domain.recipe.service;
+package com.example.backend.application.recipe;
 
-import com.example.backend.domain.recipe.model.RecipeStep;
-import com.example.backend.domain.recipe.repository.RecipeStepsRepository;
+import com.example.backend.domain.recipe.RecipeStep;
+import com.example.backend.infrastructure.persistence.recipe.RecipeStepsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

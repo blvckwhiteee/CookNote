@@ -1,6 +1,6 @@
-package com.example.backend.features.image;
+package com.example.backend.domain.image;
 
-import com.example.backend.features.recipe.Recipe;
+import com.example.backend.domain.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

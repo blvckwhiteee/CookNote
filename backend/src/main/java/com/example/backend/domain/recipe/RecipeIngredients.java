@@ -1,4 +1,4 @@
-package com.example.backend.domain.recipe.model;
+package com.example.backend.domain.recipe;
 
 import com.example.backend.domain.ingredient.Ingredient;
 import jakarta.persistence.*;

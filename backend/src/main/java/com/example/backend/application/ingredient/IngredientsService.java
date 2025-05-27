@@ -1,12 +1,14 @@
-package com.example.backend.application;
+package com.example.backend.application.ingredient;
 
 import com.example.backend.domain.ingredient.Ingredient;
-import com.example.backend.domain.ingredient.IngredientsRepository;
-import com.example.backend.domain.recipe.model.Recipe;
-import com.example.backend.domain.dto.MatchedRecipeResponseDto;
-import com.example.backend.domain.recipe.model.RecipeIngredients;
-import com.example.backend.domain.image.RecipeImagesRepository;
-import com.example.backend.domain.recipe.repository.RecipeIngredientsRepository;
+import com.example.backend.infrastructure.logging.LogLevel;
+import com.example.backend.infrastructure.logging.Loggable;
+import com.example.backend.infrastructure.persistence.ingredient.IngredientsRepository;
+import com.example.backend.domain.recipe.Recipe;
+import com.example.backend.presentation.dto.MatchedRecipeResponseDto;
+import com.example.backend.domain.recipe.RecipeIngredients;
+import com.example.backend.infrastructure.persistence.image.RecipeImagesRepository;
+import com.example.backend.infrastructure.persistence.recipe.RecipeIngredientsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class IngredientsService {
     private final RecipeIngredientsRepository recipeIngredientsRepository;
     private final RecipeImagesRepository recipeImagesRepository;
 
+    @Loggable(level = LogLevel.INFO, logExecutionTime = true)
     public List<Ingredient> getAllIngredients() {
         return ingredientsRepository.findAll();
     }

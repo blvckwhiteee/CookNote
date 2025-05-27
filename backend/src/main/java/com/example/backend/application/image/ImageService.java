@@ -1,4 +1,4 @@
-package com.example.backend.domain.image;
+package com.example.backend.application.image;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

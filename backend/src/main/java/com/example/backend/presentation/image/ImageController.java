@@ -1,4 +1,4 @@
-package com.example.backend.presentation;
+package com.example.backend.presentation.image;
 
 import com.example.backend.application.image.ImageService;
 import lombok.RequiredArgsConstructor;

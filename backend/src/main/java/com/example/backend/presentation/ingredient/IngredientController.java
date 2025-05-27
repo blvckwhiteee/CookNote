@@ -1,6 +1,7 @@
-package com.example.backend.domain.ingredient;
+package com.example.backend.presentation.ingredient;
 
 import com.example.backend.application.ingredient.IngredientsService;
+import com.example.backend.domain.ingredient.Ingredient;
 import com.example.backend.presentation.dto.MatchedRecipeResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

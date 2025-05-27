@@ -1,4 +1,4 @@
-package com.example.backend.features.ingredient;
+package com.example.backend.domain.ingredient;
 
 import jakarta.persistence.*;
 import lombok.*;

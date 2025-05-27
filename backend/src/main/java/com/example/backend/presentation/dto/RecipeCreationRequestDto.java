@@ -1,7 +1,7 @@
-package com.example.backend.domain.dto;
+package com.example.backend.presentation.dto;
 
 import com.example.backend.domain.image.RecipeImage;
-import com.example.backend.domain.recipe.model.RecipeStep;
+import com.example.backend.domain.recipe.RecipeStep;
 import lombok.*;
 
 import java.util.List;
