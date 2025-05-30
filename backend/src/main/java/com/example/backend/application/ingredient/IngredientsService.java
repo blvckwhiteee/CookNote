@@ -1,8 +1,7 @@
 package com.example.backend.application.ingredient;
 
 import com.example.backend.domain.ingredient.Ingredient;
-import com.example.backend.infrastructure.logging.LogLevel;
-import com.example.backend.infrastructure.logging.Loggable;
+import com.example.backend.infrastructure.event.EventBus;
 import com.example.backend.infrastructure.persistence.ingredient.IngredientsRepository;
 import com.example.backend.domain.recipe.Recipe;
 import com.example.backend.presentation.dto.MatchedRecipeResponseDto;
@@ -22,7 +21,6 @@ public class IngredientsService {
     private final RecipeIngredientsRepository recipeIngredientsRepository;
     private final RecipeImagesRepository recipeImagesRepository;
 
-    @Loggable(level = LogLevel.INFO, logExecutionTime = true)
     public List<Ingredient> getAllIngredients() {
         return ingredientsRepository.findAll();
     }
