@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from "react-icons/md";
-import { Button, GreenButton } from "../components/Button";
+import { GreenButton } from "../components/Button";
+import CountDownTimer from "../components/CountDownTimer";
 import styles from "./StepsPage.module.css";
 import API from "../services/api";
 
@@ -12,6 +13,7 @@ const StepsPage = () => {
   const [error, setError] = useState("");
   const loaderTimeoutRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
+  const [durationTimer, setDurationTimer] = useState(0);
 
   useEffect(() => {
     loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
@@ -23,6 +25,11 @@ const StepsPage = () => {
         setIsLoading(false);
       });
   }, [recipeId]);
+
+  useEffect(() => {
+    if (!recipeSteps) return;
+    setDurationTimer(recipeSteps[currentStep].stepTime * 1000);
+  }, [currentStep, recipeSteps]);
 
   const onNextStep = () => {
     let step = currentStep;
@@ -91,9 +98,9 @@ const StepsPage = () => {
     <>
       {recipeSteps && (
         <div className={styles.container}>
-          <Button paddingBtn="12px 36px" borderRadiusBtn="50px">
-            Start timer
-          </Button>
+          <div className={styles.timer}>
+            <CountDownTimer duration={durationTimer} />
+          </div>
 
           <h1>Step {recipeSteps[currentStep].stepNumber}</h1>
           <div className={styles.description}>

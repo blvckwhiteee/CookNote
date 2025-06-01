@@ -1,0 +1,31 @@
+.timer {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.timer p {
+  color: #b3601c;
+  font-size: 30px;
+  margin-right: 12px;
+}
+
+.timer svg {
+  color: #b3601c;
+  font-size: 28px;
+  margin-right: 2px;
+}
+
+.timer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.timer button:hover {
+  opacity: 80%;
+}

@@ -6,8 +6,9 @@
   position: relative;
 }
 
-.container button {
-  align-self: flex-end;
+.timer {
+  width: 95%;
+  text-align: end;
 }
 
 .footerButton {
