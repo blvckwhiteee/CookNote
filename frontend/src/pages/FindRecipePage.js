@@ -53,13 +53,10 @@ const FindRecipePage = () => {
     setShowRecipes(true);
   };
 
-  const handleSearch = asyncDecorator(
-    searchRecipes,
-    loaderTimeoutRef,
-    setIsLoading,
-    setError,
-    selectedIngr
-  );
+  const handleSearch = () => {
+    if (selectedIngr.length === 0) return;
+    asyncDecorator(searchRecipes, loaderTimeoutRef, setIsLoading, setError, selectedIngr);
+  };
 
   if (isLoading) {
     return (
