@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from "react-icons/md";
 import { GreenButton } from "../components/Button";
 import CountDownTimer from "../components/CountDownTimer";
+import Loader from "../components/Loader";
 import styles from "./StepsPage.module.css";
 import API from "../services/api";
 
@@ -11,17 +12,15 @@ const StepsPage = () => {
   const [recipeSteps, setRecipeSteps] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const loaderTimeoutRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [durationTimer, setDurationTimer] = useState(0);
 
   useEffect(() => {
-    loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
+    setIsLoading(true);
     API.recipe(`${recipeId}/steps`)
       .then((json) => setRecipeSteps(json))
       .catch((err) => setError(err.message))
       .finally(() => {
-        clearTimeout(loaderTimeoutRef.current);
         setIsLoading(false);
       });
   }, [recipeId]);
@@ -83,11 +82,7 @@ const StepsPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="loader-container">
-        <div className="loader"></div>
-      </div>
-    );
+    return <Loader isLoading={isLoading} />;
   }
 
   if (error) {

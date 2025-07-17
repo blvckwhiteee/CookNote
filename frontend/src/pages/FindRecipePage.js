@@ -1,25 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import IngredientsBlock from "../components/IngredientsBlock";
 import RecipesBlock from "../components/RecipesBlock";
 import { useRecipeContext } from "../store/Context";
+import Loader from "../components/Loader";
 import API from "../services/api";
 
-const asyncDecorator = (
-  asyncFunc,
-  timerRef,
-  setIsLoading,
-  setError,
-  dependence = null
-) => {
+const asyncDecorator = (asyncFunc, setIsLoading, setError, dependence = null) => {
   return async function () {
-    timerRef.current = setTimeout(() => setIsLoading(true), 2000);
+    setIsLoading(true);
     setError("");
     try {
       await asyncFunc(dependence);
     } catch (err) {
       setError(err.message);
     } finally {
-      clearTimeout(timerRef.current);
       setIsLoading(false);
     }
   };
@@ -31,7 +25,6 @@ const FindRecipePage = () => {
   const [allIngredients, setAllIngredients] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const loaderTimeoutRef = useRef(null);
 
   const searchIngrs = async () => {
     const data = await API.ingredients();
@@ -40,7 +33,7 @@ const FindRecipePage = () => {
 
   useEffect(() => {
     if (!allIngredients.length) {
-      asyncDecorator(searchIngrs, loaderTimeoutRef, setIsLoading, setError)();
+      asyncDecorator(searchIngrs, setIsLoading, setError)();
     }
   }, []);
 
@@ -55,15 +48,11 @@ const FindRecipePage = () => {
 
   const handleSearch = () => {
     if (selectedIngr.length === 0) return;
-    asyncDecorator(searchRecipes, loaderTimeoutRef, setIsLoading, setError, selectedIngr);
+    asyncDecorator(searchRecipes, setIsLoading, setError, selectedIngr);
   };
 
   if (isLoading) {
-    return (
-      <div className="loader-container">
-        <div className="loader"></div>
-      </div>
-    );
+    return <Loader isLoading={isLoading} />;
   }
 
   if (error) {

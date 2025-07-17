@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, GreenButton } from "../components/Button";
 import { IngrChip } from "../components/CustomChip";
+import Loader from "../components/Loader";
 import styles from "./SingleRecipePage.module.css";
 import API from "../services/api";
 
@@ -10,25 +11,19 @@ const SingleRecipePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { recipeSlug, recipeId } = useParams();
-  const loaderTimeoutRef = useRef(null);
 
   useEffect(() => {
-    loaderTimeoutRef.current = setTimeout(() => setIsLoading(true), 2000);
+    setIsLoading(true);
     API.recipe(recipeId)
       .then((json) => setRecipeData(json))
       .catch((err) => setError(err.message))
       .finally(() => {
-        clearTimeout(loaderTimeoutRef.current);
         setIsLoading(false);
       });
   }, [recipeId]);
 
   if (isLoading) {
-    return (
-      <div className="loader-container">
-        <div className="loader"></div>
-      </div>
-    );
+    return <Loader isLoading={isLoading} />;
   }
 
   if (error) {
